@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.22.0",
   "scripts": {
     "build": "turbo run build",
+    "build:tsc":  "tsc -b tsconfig.build.json",
     "build:apps": "turbo run build:app",
     "changeset": "changeset",
     "inject-license": "node scripts/inject-license.js",

@@ -4,9 +4,12 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "NodeNext",
     "moduleResolution": "nodenext",
+    "noEmit": true,
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
@@ -19,5 +22,12 @@
     "target": "ESNext",
     "verbatimModuleSyntax": true
   },
-  "exclude": ["**/dist/*", "**/node_modules/*"]
+  "include": [
+    "${configDir}/src",
+    "${configDir}/test"
+  ],
+  "exclude": [
+    "**/dist/*",
+    "**/node_modules/*"
+  ]
 }

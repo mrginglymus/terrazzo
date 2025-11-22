@@ -1,0 +1,47 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "composite": true,
+    "outDir": "${configDir}/dist",
+    "rootDir": "${configDir}/src"
+  },
+  "references": [
+    {
+      "path": "packages/cli/tsconfig.build.json"
+    },
+    {
+      "path": "packages/json-schema-tools/tsconfig.build.json"
+    },
+    {
+      "path": "packages/parser/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-css/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-js/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-sass/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-swift/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-tailwind/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-token-listing/tsconfig.build.json"
+    },
+    {
+      "path": "packages/plugin-vanilla-extract/tsconfig.build.json"
+    },
+    {
+      "path": "packages/token-tools/tsconfig.build.json"
+    }
+  ],
+  "include": [
+    "${configDir}/src"
+  ]
+}

@@ -27,7 +27,6 @@
     "directory": "./packages/plugin-css/"
   },
   "scripts": {
-    "build": "rolldown -c && attw --profile esm-only --pack .",
     "dev": "rolldown -w -c",
     "format": "biome check --fix --unsafe .",
     "lint": "pnpm --filter @terrazzo/plugin-css run \"/^lint:(js|ts)/\"",

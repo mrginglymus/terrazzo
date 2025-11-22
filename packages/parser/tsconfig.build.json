@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.build.json",
+  "references": [{
+    "path": "../token-tools/tsconfig.build.json"
+  },{
+    "path": "../json-schema-tools/tsconfig.build.json"
+  }]
+}
