@@ -1,7 +1,9 @@
-import type { TokenNormalizedSet } from '../types.js';
+import type { TokenNormalized, TokenNormalizedSet } from '../types.js';
 import type { IDGenerator } from './lib.js';
 
 export interface TransformCSSValueOptions {
+  /** Callback to resolve a token alias, if present */
+  resolveAlias?: (token: TokenNormalized) => TokenNormalized | undefined;
   /** Complete set of tokens (needed to resolve full and partial aliases) */
   tokensSet: TokenNormalizedSet;
   transformAlias?: IDGenerator;

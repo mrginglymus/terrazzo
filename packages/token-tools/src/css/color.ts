@@ -41,11 +41,11 @@ export function transformColor(
   token: ColorTokenNormalized,
   options: TransformCSSValueOptions,
 ): string | WideGamutColorValue {
-  const { transformAlias = defaultAliasTransform, tokensSet } = options;
+  const { transformAlias = defaultAliasTransform, resolveAlias } = options;
 
-  const firstAlias = token.aliasChain?.[0];
-  if (firstAlias && tokensSet[firstAlias]) {
-    return transformAlias(tokensSet[firstAlias]);
+  const firstAlias = resolveAlias?.(token);
+  if (firstAlias) {
+    return transformAlias(firstAlias);
   }
 
   const {

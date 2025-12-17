@@ -36,7 +36,7 @@ export default function cssPlugin(options?: CSSPluginOptions): Plugin {
 
   return {
     name: '@terrazzo/plugin-css',
-    async transform({ tokens, getTransforms, setTransform }) {
+    async transform({ context, tokens, getTransforms, setTransform }) {
       // skip work if another .css plugin has already run
       const cssTokens = getTransforms({ format: FORMAT_ID, id: '*', mode: '*' });
       if (cssTokens.length) {
@@ -65,6 +65,23 @@ export default function cssPlugin(options?: CSSPluginOptions): Plugin {
             mode,
             tokensSet: tokens,
             transformAlias,
+            resolveAlias: (token) => {
+              const alias = token.aliasChain?.[0];
+              if (!alias) {
+                return;
+              }
+
+              const resolved = tokens[alias];
+              if (!resolved) {
+                context.logger.error({
+                  group: 'plugin',
+                  label: 'css',
+                  message: `Could not resolve alias '${alias}'`,
+                  node: token.source.node,
+                });
+              }
+              return resolved;
+            },
             color: { legacyHex },
           });
           if (transformedValue !== undefined) {
