@@ -1,4 +1,5 @@
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { defineConfig, parse } from '../src/index.js';
 import { DEFAULT_FILENAME, parserTest, type Test } from './test-utils.js';
 
 describe('$extends', () => {
@@ -152,5 +153,39 @@ describe('$extends', () => {
 
   it.each(tests)('%s', async (_, { given, want }) => {
     await parserTest({ given, want });
+  });
+
+  it.only('resolves', async () => {
+    const config = defineConfig({}, { cwd: new URL(import.meta.url) });
+    const { resolver } = await parse(
+      {
+        filename: new URL('resolver.json', import.meta.url),
+        src: JSON.stringify({
+          version: '2025.10',
+          name: 'resolver-extends-test',
+          sets: {
+            root: {
+              sources: [
+                {
+                  foo: {
+                    token: {
+                      $type: 'number',
+                      $value: 100,
+                    },
+                  },
+                  bar: {
+                    $extends: '{foo}',
+                  },
+                },
+              ],
+            },
+          },
+          resolutionOrder: [{ $ref: '#/sets/root' }],
+        }),
+      },
+      { config },
+    );
+    const root = resolver.source.sets!.root!.sources[0]!;
+    expect(Object.keys(root.bar)).toContain('token');
   });
 });
